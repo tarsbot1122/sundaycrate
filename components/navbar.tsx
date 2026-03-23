@@ -16,6 +16,7 @@ import {
   ChevronDown,
   Search,
   Store,
+  BookOpen,
   Brain,
   HeartHandshake,
   ClipboardList,
@@ -192,6 +193,14 @@ export function Navbar() {
               </div>
 
               <Link
+                href="/blog"
+                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-navy rounded-lg hover:bg-gray-50 transition-all duration-200 flex items-center gap-1.5"
+              >
+                <BookOpen className="h-4 w-4" />
+                Blog
+              </Link>
+
+              <Link
                 href="/sell"
                 className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-navy rounded-lg hover:bg-gray-50 transition-all duration-200 flex items-center gap-1.5"
               >
@@ -348,6 +357,15 @@ export function Navbar() {
                 ))}
               </div>
             )}
+
+            <Link
+              href="/blog"
+              className="flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-gray-600 hover:text-navy hover:bg-gray-50 rounded-lg transition-all"
+              onClick={() => setMenuOpen(false)}
+            >
+              <BookOpen className="h-4 w-4" />
+              Blog
+            </Link>
 
             <Link
               href="/sell"
