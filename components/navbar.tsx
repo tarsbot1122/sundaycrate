@@ -137,7 +137,7 @@ export function Navbar() {
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2.5 group">
               <div className="relative">
-                <ShoppingBag className="h-7 w-7 text-gold transition-transform duration-300 group-hover:scale-110" />
+                <HeartHandshake className="h-7 w-7 text-gold transition-transform duration-300 group-hover:scale-110" />
               </div>
               <span className="text-xl font-bold text-navy">SundayCrate</span>
             </Link>
