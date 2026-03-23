@@ -1,41 +1,77 @@
-import { ShoppingBag } from 'lucide-react';
+import { ShoppingBag, Heart } from 'lucide-react';
 import Link from 'next/link';
+import { CATEGORIES } from '@/lib/categories';
 
 export function Footer() {
+  const topCategories = CATEGORIES.slice(0, 6);
+
   return (
     <footer className="bg-navy text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="col-span-1 md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-4">
+      {/* Main footer */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12">
+          {/* Brand */}
+          <div className="col-span-2">
+            <Link href="/" className="flex items-center gap-2.5 mb-5">
               <ShoppingBag className="h-7 w-7 text-gold" />
               <span className="text-xl font-bold">SundayCrate</span>
             </Link>
-            <p className="text-gray-400 text-sm max-w-md">
-              Therapy resources, created by your community. A marketplace where therapists and
-              counselors sell digital products to mental health professionals everywhere.
+            <p className="text-gray-400 text-sm leading-relaxed max-w-sm mb-6">
+              A curated marketplace where therapists share and discover digital resources.
+              Built by clinicians, for clinicians.
             </p>
           </div>
+
+          {/* Categories */}
           <div>
-            <h4 className="font-semibold mb-4">Browse</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li><Link href="/browse?category=cbt-worksheets" className="hover:text-gold transition-colors">CBT Worksheets</Link></li>
-              <li><Link href="/browse?category=dbt-worksheets" className="hover:text-gold transition-colors">DBT Worksheets</Link></li>
-              <li><Link href="/browse?category=intake-assessment-forms" className="hover:text-gold transition-colors">Intake & Assessment</Link></li>
-              <li><Link href="/browse?category=anxiety-stress-management" className="hover:text-gold transition-colors">Anxiety & Stress</Link></li>
+            <h4 className="font-semibold text-sm uppercase tracking-wider text-gray-300 mb-4">Categories</h4>
+            <ul className="space-y-2.5 text-sm text-gray-400">
+              {topCategories.map((cat) => (
+                <li key={cat.slug}>
+                  <Link href={`/browse?category=${cat.slug}`} className="hover:text-gold transition-colors duration-200">
+                    {cat.name}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link href="/browse" className="text-gold hover:text-gold-300 transition-colors duration-200 font-medium">
+                  View All
+                </Link>
+              </li>
             </ul>
           </div>
+
+          {/* For Sellers */}
           <div>
-            <h4 className="font-semibold mb-4">Company</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li><Link href="/browse" className="hover:text-gold transition-colors">All Products</Link></li>
-              <li><Link href="/signup" className="hover:text-gold transition-colors">Become a Seller</Link></li>
-              <li><Link href="/login" className="hover:text-gold transition-colors">Sign In</Link></li>
+            <h4 className="font-semibold text-sm uppercase tracking-wider text-gray-300 mb-4">For Sellers</h4>
+            <ul className="space-y-2.5 text-sm text-gray-400">
+              <li><Link href="/signup" className="hover:text-gold transition-colors duration-200">Start Selling</Link></li>
+              <li><Link href="/seller" className="hover:text-gold transition-colors duration-200">Seller Dashboard</Link></li>
+              <li><Link href="/seller/products/new" className="hover:text-gold transition-colors duration-200">Upload a Resource</Link></li>
+            </ul>
+          </div>
+
+          {/* Support */}
+          <div>
+            <h4 className="font-semibold text-sm uppercase tracking-wider text-gray-300 mb-4">Company</h4>
+            <ul className="space-y-2.5 text-sm text-gray-400">
+              <li><Link href="/browse" className="hover:text-gold transition-colors duration-200">All Resources</Link></li>
+              <li><Link href="/login" className="hover:text-gold transition-colors duration-200">Sign In</Link></li>
+              <li><Link href="/signup" className="hover:text-gold transition-colors duration-200">Create Account</Link></li>
             </ul>
           </div>
         </div>
-        <div className="border-t border-white/10 mt-12 pt-8 text-center text-sm text-gray-400">
-          &copy; {new Date().getFullYear()} SundayCrate. All rights reserved.
+      </div>
+
+      {/* Bottom bar */}
+      <div className="border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-gray-500">
+            &copy; {new Date().getFullYear()} SundayCrate. All rights reserved.
+          </p>
+          <p className="text-sm text-gray-500 flex items-center gap-1">
+            Made with <Heart className="h-3.5 w-3.5 text-gold fill-gold" /> for therapists everywhere
+          </p>
         </div>
       </div>
     </footer>
