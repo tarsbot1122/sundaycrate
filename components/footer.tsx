@@ -14,7 +14,7 @@ export function Footer() {
           <div className="col-span-2">
             <Link href="/" className="flex items-center gap-2.5 mb-5">
               <ShoppingBag className="h-7 w-7 text-gold" />
-              <span className="text-xl font-bold">SundayCrate</span>
+              <span className="text-xl font-bold">Shrinkwrap</span>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed max-w-sm mb-6">
               A curated marketplace where therapists share and discover digital resources.
@@ -67,7 +67,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} SundayCrate. All rights reserved.
+            &copy; {new Date().getFullYear()} Shrinkwrap. All rights reserved.
           </p>
           <p className="text-sm text-gray-500 flex items-center gap-1">
             Made with <Heart className="h-3.5 w-3.5 text-gold fill-gold" /> for therapists everywhere

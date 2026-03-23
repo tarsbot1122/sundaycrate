@@ -35,7 +35,7 @@ export default function SellPage() {
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-gold text-sm font-medium mb-8">
               <Store className="h-4 w-4" />
-              SundayCrate Seller Program
+              Shrinkwrap Seller Program
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] mb-6 tracking-tight">
@@ -201,7 +201,7 @@ export default function SellPage() {
       <section className="py-20 lg:py-28 bg-gradient-to-b from-white to-cream-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-3xl lg:text-4xl font-bold text-navy mb-4 tracking-tight">Why Sell on SundayCrate</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-navy mb-4 tracking-tight">Why Sell on Shrinkwrap</h2>
             <p className="text-gray-500 text-lg max-w-2xl mx-auto">Everything you need to succeed as a seller</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -50,7 +50,7 @@ export default function LoginPage() {
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
             <ShoppingBag className="h-8 w-8 text-gold" />
-            <span className="text-2xl font-bold text-navy">SundayCrate</span>
+            <span className="text-2xl font-bold text-navy">Shrinkwrap</span>
           </Link>
           <h1 className="text-2xl font-bold text-navy">Welcome back</h1>
           <p className="text-gray-600 mt-1">Sign in to your account</p>

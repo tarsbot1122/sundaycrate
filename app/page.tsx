@@ -293,7 +293,7 @@ export default async function HomePage() {
       <section className="py-20 lg:py-28 bg-gradient-to-b from-white to-cream-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-3xl lg:text-4xl font-bold text-navy mb-4 tracking-tight">Why Therapists Choose SundayCrate</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-navy mb-4 tracking-tight">Why Therapists Choose Shrinkwrap</h2>
             <p className="text-gray-500 text-lg max-w-2xl mx-auto">A trusted platform built specifically for mental health professionals</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">

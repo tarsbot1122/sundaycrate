@@ -16,7 +16,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "SundayCrate — Therapy Resources Marketplace",
+  title: "Shrinkwrap — Therapy Resources Marketplace",
   description: "A marketplace where therapists and counselors sell digital products — worksheets, templates, toolkits, and more — to mental health professionals everywhere.",
 };
 

@@ -92,7 +92,7 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
           onClick={() => setSidebarOpen(false)}
         >
           <ShoppingBag className="h-7 w-7 text-gold" />
-          <span className="text-lg font-bold text-white">SundayCrate</span>
+          <span className="text-lg font-bold text-white">Shrinkwrap</span>
         </Link>
       </div>
 
@@ -221,7 +221,7 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
           </button>
           <Link href="/" className="flex items-center gap-2">
             <ShoppingBag className="h-6 w-6 text-gold" />
-            <span className="font-bold text-white text-base">SundayCrate</span>
+            <span className="font-bold text-white text-base">Shrinkwrap</span>
           </Link>
           <Link
             href="/seller/products/new"

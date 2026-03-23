@@ -139,7 +139,7 @@ export function Navbar() {
               <div className="relative">
                 <HeartHandshake className="h-7 w-7 text-gold transition-transform duration-300 group-hover:scale-110" />
               </div>
-              <span className="text-xl font-bold text-navy">SundayCrate</span>
+              <span className="text-xl font-bold text-navy">Shrinkwrap</span>
             </Link>
 
             {/* Desktop Nav - Browse dropdown + Sell */}
