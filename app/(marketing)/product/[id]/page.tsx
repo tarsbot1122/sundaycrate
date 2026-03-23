@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { Product } from '@/types';
 import { formatPrice, getInitials, timeAgo } from '@/lib/utils';
