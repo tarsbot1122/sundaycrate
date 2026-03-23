@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
-import { stripe } from '@/lib/stripe';
+import { getStripe } from '@/lib/stripe';
 
 export async function GET(req: NextRequest) {
   try {
@@ -25,7 +25,7 @@ export async function GET(req: NextRequest) {
 
     if (!accountId) {
       // Create a new Stripe Connect Express account
-      const account = await stripe.accounts.create({
+      const account = await getStripe().accounts.create({
         type: 'express',
         email: user.email,
         capabilities: {
@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
     const origin = req.headers.get('origin') || new URL(req.url).origin;
 
     // Create an account link for onboarding
-    const accountLink = await stripe.accountLinks.create({
+    const accountLink = await getStripe().accountLinks.create({
       account: accountId,
       refresh_url: `${origin}/api/seller/connect`,
       return_url: `${origin}/seller?stripe=connected`,

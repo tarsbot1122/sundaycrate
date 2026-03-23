@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
-import { stripe, calculatePlatformFee } from '@/lib/stripe';
+import { getStripe, calculatePlatformFee } from '@/lib/stripe';
 
 export async function POST(req: NextRequest) {
   try {
@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
     const origin = req.headers.get('origin') || '';
 
     // Create Stripe Checkout Session with Connect
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
       mode: 'payment',
       line_items: [
         {
