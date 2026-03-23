@@ -360,8 +360,8 @@ export default async function HomePage() {
             <span className="text-gold"> passive income</span>
           </h2>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-            Join our community of therapists who earn by sharing the resources they&apos;ve already created.
-            You keep 85% of every sale.
+            Earn money sharing the resources you&apos;ve already created.
+            Join a growing community of therapists turning their expertise into income.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/signup">
@@ -370,7 +370,7 @@ export default async function HomePage() {
                 <ArrowRight className="h-5 w-5" />
               </Button>
             </Link>
-            <Link href="/seller" className="text-gray-300 hover:text-white text-sm font-medium transition-colors flex items-center gap-1.5">
+            <Link href="/sell" className="text-gray-300 hover:text-white text-sm font-medium transition-colors flex items-center gap-1.5">
               Learn more about selling <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -379,8 +379,8 @@ export default async function HomePage() {
           <div className="grid grid-cols-3 gap-4 mt-14 max-w-lg mx-auto">
             {[
               { label: 'Upload', sublabel: 'Your resources' },
-              { label: 'Earn 85%', sublabel: 'Per sale' },
-              { label: 'Instant', sublabel: 'Payouts' },
+              { label: 'Get Paid', sublabel: 'Weekly payouts' },
+              { label: 'Grow', sublabel: 'Your audience' },
             ].map((item) => (
               <div key={item.label} className="bg-white/5 rounded-xl p-4 backdrop-blur-sm border border-white/10">
                 <p className="font-bold text-white text-lg">{item.label}</p>

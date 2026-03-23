@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState, useRef } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { Button } from '@/components/ui/button';
+import { CATEGORIES } from '@/lib/categories';
 import { User } from '@/types';
 import {
   Menu,
@@ -15,17 +16,48 @@ import {
   ChevronDown,
   Search,
   Store,
+  Brain,
+  HeartHandshake,
+  ClipboardList,
+  Users,
+  ShieldCheck,
+  Eye,
+  Shield,
+  Briefcase,
+  Palette,
+  Layers,
+  Activity,
+  Frame,
 } from 'lucide-react';
+
+const iconMap: Record<string, React.ReactNode> = {
+  Brain: <Brain className="h-5 w-5" />,
+  HeartHandshake: <HeartHandshake className="h-5 w-5" />,
+  ClipboardList: <ClipboardList className="h-5 w-5" />,
+  Users: <Users className="h-5 w-5" />,
+  ShieldCheck: <ShieldCheck className="h-5 w-5" />,
+  Eye: <Eye className="h-5 w-5" />,
+  Shield: <Shield className="h-5 w-5" />,
+  Briefcase: <Briefcase className="h-5 w-5" />,
+  Palette: <Palette className="h-5 w-5" />,
+  Layers: <Layers className="h-5 w-5" />,
+  Activity: <Activity className="h-5 w-5" />,
+  Frame: <Frame className="h-5 w-5" />,
+};
 
 export function Navbar() {
   const [user, setUser] = useState<User | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [browseOpen, setBrowseOpen] = useState(false);
+  const [categoriesExpanded, setCategoriesExpanded] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const searchInputRef = useRef<HTMLInputElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
+  const browseRef = useRef<HTMLDivElement>(null);
+  const browseTimeout = useRef<NodeJS.Timeout | null>(null);
   const router = useRouter();
   const supabase = createClient();
 
@@ -61,6 +93,9 @@ export function Navbar() {
       if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
         setProfileOpen(false);
       }
+      if (browseRef.current && !browseRef.current.contains(e.target as Node)) {
+        setBrowseOpen(false);
+      }
     }
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
@@ -79,7 +114,17 @@ export function Navbar() {
       router.push(`/browse?q=${encodeURIComponent(searchQuery.trim())}`);
       setSearchOpen(false);
       setSearchQuery('');
+      setMenuOpen(false);
     }
+  }
+
+  function handleBrowseEnter() {
+    if (browseTimeout.current) clearTimeout(browseTimeout.current);
+    setBrowseOpen(true);
+  }
+
+  function handleBrowseLeave() {
+    browseTimeout.current = setTimeout(() => setBrowseOpen(false), 200);
   }
 
   const dashboardLink = user?.role === 'seller' ? '/seller' : user?.role === 'admin' ? '/admin' : '/buyer';
@@ -89,28 +134,71 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="relative">
-              <ShoppingBag className="h-7 w-7 text-gold transition-transform duration-300 group-hover:scale-110" />
-            </div>
-            <span className="text-xl font-bold text-navy">SundayCrate</span>
-          </Link>
+          <div className="flex items-center gap-6">
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <div className="relative">
+                <ShoppingBag className="h-7 w-7 text-gold transition-transform duration-300 group-hover:scale-110" />
+              </div>
+              <span className="text-xl font-bold text-navy">SundayCrate</span>
+            </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1">
-            <Link
-              href="/browse"
-              className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-navy rounded-lg hover:bg-gray-50 transition-all duration-200"
-            >
-              Browse
-            </Link>
-            <Link
-              href="/seller"
-              className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-navy rounded-lg hover:bg-gray-50 transition-all duration-200 flex items-center gap-1.5"
-            >
-              <Store className="h-4 w-4" />
-              Sell
-            </Link>
+            {/* Desktop Nav - Browse dropdown + Sell */}
+            <div className="hidden md:flex items-center gap-1">
+              {/* Browse with mega-menu */}
+              <div
+                ref={browseRef}
+                className="relative"
+                onMouseEnter={handleBrowseEnter}
+                onMouseLeave={handleBrowseLeave}
+              >
+                <button
+                  onClick={() => setBrowseOpen(!browseOpen)}
+                  className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-gray-600 hover:text-navy rounded-lg hover:bg-gray-50 transition-all duration-200"
+                >
+                  Browse
+                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${browseOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {/* Mega menu dropdown */}
+                {browseOpen && (
+                  <div className="absolute top-full left-0 mt-1 w-[540px] bg-white rounded-2xl shadow-lift border border-gray-100 p-5 animate-fade-in">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-sm font-semibold text-navy">All Categories</h3>
+                      <Link
+                        href="/browse"
+                        className="text-xs font-medium text-gold hover:text-gold-700 transition-colors"
+                        onClick={() => setBrowseOpen(false)}
+                      >
+                        View All →
+                      </Link>
+                    </div>
+                    <div className="grid grid-cols-3 gap-1">
+                      {CATEGORIES.map((cat) => (
+                        <Link
+                          key={cat.slug}
+                          href={`/browse?category=${cat.slug}`}
+                          className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-gray-600 hover:bg-cream hover:text-navy transition-all duration-200 group"
+                          onClick={() => setBrowseOpen(false)}
+                        >
+                          <div className="h-8 w-8 rounded-lg bg-gray-50 group-hover:bg-gold/10 flex items-center justify-center text-gray-400 group-hover:text-gold transition-all duration-200 flex-shrink-0">
+                            {iconMap[cat.icon] || <ShoppingBag className="h-5 w-5" />}
+                          </div>
+                          <span className="font-medium leading-tight">{cat.name}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <Link
+                href="/sell"
+                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-navy rounded-lg hover:bg-gray-50 transition-all duration-200 flex items-center gap-1.5"
+              >
+                <Store className="h-4 w-4" />
+                Sell
+              </Link>
+            </div>
           </div>
 
           {/* Right side */}
@@ -231,10 +319,38 @@ export function Navbar() {
               className="block px-3 py-2.5 text-sm font-medium text-gray-600 hover:text-navy hover:bg-gray-50 rounded-lg transition-all"
               onClick={() => setMenuOpen(false)}
             >
-              Browse
+              Browse All
             </Link>
+
+            {/* Collapsible categories */}
+            <button
+              onClick={() => setCategoriesExpanded(!categoriesExpanded)}
+              className="flex items-center justify-between w-full px-3 py-2.5 text-sm font-medium text-gray-600 hover:text-navy hover:bg-gray-50 rounded-lg transition-all"
+            >
+              <span>Categories</span>
+              <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${categoriesExpanded ? 'rotate-180' : ''}`} />
+            </button>
+
+            {categoriesExpanded && (
+              <div className="pl-3 space-y-0.5 animate-fade-in">
+                {CATEGORIES.map((cat) => (
+                  <Link
+                    key={cat.slug}
+                    href={`/browse?category=${cat.slug}`}
+                    className="flex items-center gap-2.5 px-3 py-2 text-sm text-gray-500 hover:text-navy hover:bg-gray-50 rounded-lg transition-all"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <div className="h-7 w-7 rounded-md bg-gray-50 flex items-center justify-center text-gray-400 flex-shrink-0">
+                      {iconMap[cat.icon] || <ShoppingBag className="h-4 w-4" />}
+                    </div>
+                    {cat.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+
             <Link
-              href="/seller"
+              href="/sell"
               className="flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-gray-600 hover:text-navy hover:bg-gray-50 rounded-lg transition-all"
               onClick={() => setMenuOpen(false)}
             >
